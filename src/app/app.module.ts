@@ -7,6 +7,7 @@ import { CancionesComponent } from './canciones/canciones.component';
 
 //services
 import { CancionesService } from './providers/canciones.service';
+import { HttpClientModule } from '@angular/common/http';
 
 //pipes
 
@@ -17,6 +18,7 @@ import { CancionesService } from './providers/canciones.service';
     CancionesComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule
   ],
   providers: [CancionesService],

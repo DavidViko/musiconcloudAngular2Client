@@ -9,7 +9,7 @@ import { Cancion } from '../model/cancion';
 })
 export class CancionesComponent implements OnInit {
 
-  // cancones
+  // canciones
   canciones: Cancion[];
   cancionSeleccionada: Cancion;
 
@@ -19,16 +19,26 @@ export class CancionesComponent implements OnInit {
     //inicializar atributos
     this.canciones=[];
 
-    this.cancionSeleccionada = new Cancion(2,"Mock");
-    //this.cancionSeleccionada.nombre("SETTER_Mock");
-
-    this.mockData();
+    //this.mockData();
   }
 
   ngOnInit() {
-    console.log('CancionesComponent onInit');
-
-    //llamadas a servicios
+    console.log('CancionesComponent ngOnInit');
+    //llamadas a los servicios
+    this.cancionesService.getAll().subscribe(
+      result=>{
+        console.log('response correcto %o', result);
+        //let cancion: Cancion;
+        result.forEach( element => {
+            
+            this.canciones.push( element );
+        });
+        
+      },
+      error=>{
+        console.warn(error);
+      }
+    );
   }
 
   eliminar (id:number){
@@ -36,7 +46,7 @@ export class CancionesComponent implements OnInit {
   }
 
   mockData(){
-    this.canciones.push(new Cancion(1,"macarena"));
+    this.canciones.push(new Cancion(1,"macarana"));
     this.canciones.push(new Cancion(2,"mocorono"));
     this.canciones.push(new Cancion(3,"mecerene"));
     this.canciones.push(new Cancion(4,"micirini"));

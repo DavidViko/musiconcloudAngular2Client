@@ -7,33 +7,40 @@ import { Cancion } from '../model/cancion';
 
 //import { Configuration } from '../../app.constants';
 
+const END_POINT = 'http://localhost:8080/cancion/';
+
+
 @Injectable()
 export class CancionesService {
-
-    private url = 'http://localhost:8080/cancion/';
     
     constructor(private http: HttpClient) {   
     }
 
     public getAll(): Observable<any> {
-      console.log(`CancionesService getAll ${this.url}`);
-        return this.http.get(this.url);
+        let url = END_POINT;
+      console.log(`CancionesService getAll ${url}`);
+        return this.http.get(END_POINT);
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(this.url + id);
+        let url = END_POINT + id;
+        return this.http.get(url);
     }
 
-    public add(nombre: string): Observable<any> {
-        const toAdd = JSON.stringify({ nombre: nombre });
-        return this.http.post(this.url, toAdd);
+    public crear(nombre: string): Observable<any> {
+        let url = END_POINT;
+        let body = { "nombre": nombre };
+        return this.http.post(url, body);
     }
 
-    public update(id: number, cancion: Cancion): Observable<any> {
-        return this.http.put(this.url + id, JSON.stringify(cancion));
+    public update(cancion: Cancion): Observable<any> {
+        let url = END_POINT + cancion.id;
+        let body = cancion;
+        return this.http.put(url, body);
     }
 
     public delete(id: number): Observable<any> {
-        return this.http.delete(this.url + id);
+        let url = END_POINT + id;
+        return this.http.delete(url);
     }
 }

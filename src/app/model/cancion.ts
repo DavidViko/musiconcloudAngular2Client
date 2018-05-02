@@ -1,5 +1,5 @@
 export class Cancion{
-    _id: number;
+    _id: number; //los atributos comienzan por "_" para que sean privados y solo se acceda por los getter y setter
     _nombre: String;
 
     constructor(id:number=-1, nombre: String = ""){

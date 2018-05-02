@@ -1,12 +1,20 @@
 <h1>Canciones</h1>
+
+<div class="input-group input-group">
+  <div class="input-group-prepend">
+    <button (click)="crearCancion()" class="btn btn-block btn-primary" >Nueva cancion</button>
+  </div>
+  <input type="text" [(ngModel)] = "nombreCancion" class="text-primary" placeholder="Nombre de la cancion">
+  <p *ngIf="isInvalid" class="text-danger">*Escribe algo</p>
+</div>
+
 <div class="jumbotron">
   <p *ngIf="canciones.length == 0">Todavia no existen canciones</p>
 
-  <input type ="button" value="Añadir Nueva" onclick="add()">
-  <ul class="list-group" *ngFor="let cancion of canciones">
-      <li class="list-group-item d-flex justify-content-between align-items-center">
+  <ul class="list-group">
+      <li *ngFor="let cancion of canciones; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
         <span class="badge badge-primary badge-pill">{{cancion.id}}</span>
-        <span class="text-left">{{cancion.nombre}}</span>
+        <span class="text-left"><input [(ngModel)]="cancion.nombre" (focusout)="modificar(i)"></span>
         <span (click)="eliminar(cancion.id)" class="badge badge-danger badge-pill">Eliminar</span>
       </li>
   </ul>  
